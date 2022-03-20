@@ -18,6 +18,14 @@ def main():
     file = open("data/yt.txt", "r")
     data = file.read()
 
+    file1 = open("data/yt.txt")
+    answers = []
+    for line in file1.readlines():
+        line = line.split('-')[1]
+        for letter in line.split(';'):
+            line
+        answers.append(line)
+
     """ Sending the filename to the server. """
     client.send("yt.txt".encode(FORMAT))
     msg = client.recv(SIZE).decode(FORMAT)
