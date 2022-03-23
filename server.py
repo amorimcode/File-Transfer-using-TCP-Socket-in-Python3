@@ -1,5 +1,6 @@
 
 import socket
+import numpy as np
 
 IP = socket.gethostbyname(socket.gethostname())
 PORT = 4455
@@ -50,25 +51,17 @@ def main():
                 answer.append(letter)
             answers_aluno.append(answer)
 
-        print(answers_aluno)
-
         answers_gabarito = []
         for line in file_gabarito.readlines():
             line = line.split('-')[1]
             answer=[]
             for letter in line.split(';'):
                 answer.append(letter)
+            if '' in answer:
+                answer.remove('')
+            if '\n' in answer:
+                answer.remove('\n')
             answers_gabarito.append(answer)
-
-        print(answers_gabarito)
-
-
-        for item_aluno, item_gabarito in answers_aluno, answers_gabarito:
-            for idx, val in enumerate(item_aluno):
-                print(val, item_gabarito[idx])
-                print(val == item_gabarito[idx])
-
-
 
 
         """ Closing the connection from the client. """
