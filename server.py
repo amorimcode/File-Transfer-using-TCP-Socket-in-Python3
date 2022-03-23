@@ -39,6 +39,38 @@ def main():
         """ Closing the file. """
         file.close()
 
+        file_aluno = open(filename)
+        file_gabarito = open('gabarito.txt')
+
+        answers_aluno = []
+        for line in file_aluno.readlines():
+            line = line.split('-')[1]
+            answer=[]
+            for letter in line.split(';'):
+                answer.append(letter)
+            answers_aluno.append(answer)
+
+        print(answers_aluno)
+
+        answers_gabarito = []
+        for line in file_gabarito.readlines():
+            line = line.split('-')[1]
+            answer=[]
+            for letter in line.split(';'):
+                answer.append(letter)
+            answers_gabarito.append(answer)
+
+        print(answers_gabarito)
+
+
+        for item_aluno, item_gabarito in answers_aluno, answers_gabarito:
+            for idx, val in enumerate(item_aluno):
+                print(val, item_gabarito[idx])
+                print(val == item_gabarito[idx])
+
+
+
+
         """ Closing the connection from the client. """
         conn.close()
         print(f"[DISCONNECTED] {addr} disconnected.")

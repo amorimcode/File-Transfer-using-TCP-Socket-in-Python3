@@ -15,19 +15,13 @@ def main():
     client.connect(ADDR)
 
     """ Opening and reading the file data. """
-    file = open("data/yt.txt", "r")
+    file = open("data/aluno.txt", "r")
     data = file.read()
 
-    file1 = open("data/yt.txt")
-    answers = []
-    for line in file1.readlines():
-        line = line.split('-')[1]
-        for letter in line.split(';'):
-            line
-        answers.append(line)
+
 
     """ Sending the filename to the server. """
-    client.send("yt.txt".encode(FORMAT))
+    client.send("aluno.txt".encode(FORMAT))
     msg = client.recv(SIZE).decode(FORMAT)
     print(f"[SERVER]: {msg}")
 
