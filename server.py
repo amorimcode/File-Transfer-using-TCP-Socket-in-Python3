@@ -8,6 +8,7 @@ ADDR = (IP, PORT)
 SIZE = 1024
 FORMAT = "utf-8"
 
+
 def main():
     print("[STARTING] Server is starting.")
     """ Staring a TCP socket. """
@@ -46,7 +47,7 @@ def main():
         answers_aluno = []
         for line in file_aluno.readlines():
             line = line.split('-')[1]
-            answer=[]
+            answer = []
             for letter in line.split(';'):
                 answer.append(letter)
             if '' in answer:
@@ -58,7 +59,7 @@ def main():
         answers_gabarito = []
         for line in file_gabarito.readlines():
             line = line.split('-')[1]
-            answer=[]
+            answer = []
             for letter in line.split(';'):
                 answer.append(letter)
             if '' in answer:
@@ -67,11 +68,21 @@ def main():
                 answer.remove('\n')
             answers_gabarito.append(answer)
 
-        print(answers_aluno, answers_gabarito)
+        hits = 0
+        misses = 0
+        for idx1, item in enumerate(answers_aluno):
+            for idx2, value in enumerate(item):
+                if value == answers_gabarito[idx1][idx2]:
+                    hits += 1
+                else:
+                    misses += 1
+
+        conn.send(f'Acertos: {hits} \nErros: {misses}'.encode(FORMAT))
 
         """ Closing the connection from the client. """
         conn.close()
         print(f"[DISCONNECTED] {addr} disconnected.")
+
 
 if __name__ == "__main__":
     main()

@@ -7,6 +7,7 @@ ADDR = (IP, PORT)
 FORMAT = "utf-8"
 SIZE = 1024
 
+
 def main():
     """ Staring a TCP socket. """
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -17,8 +18,6 @@ def main():
     """ Opening and reading the file data. """
     file = open("data/aluno.txt", "r")
     data = file.read()
-
-
 
     """ Sending the filename to the server. """
     client.send("aluno.txt".encode(FORMAT))
@@ -32,6 +31,9 @@ def main():
 
     """ Closing the file. """
     file.close()
+
+    msg = client.recv(SIZE).decode(FORMAT)
+    print(msg)
 
     """ Closing the connection from the server. """
     client.close()
