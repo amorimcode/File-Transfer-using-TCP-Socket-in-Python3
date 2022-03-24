@@ -49,6 +49,10 @@ def main():
             answer=[]
             for letter in line.split(';'):
                 answer.append(letter)
+            if '' in answer:
+                answer.remove('')
+            if '\n' in answer:
+                answer.remove('\n')
             answers_aluno.append(answer)
 
         answers_gabarito = []
@@ -63,6 +67,7 @@ def main():
                 answer.remove('\n')
             answers_gabarito.append(answer)
 
+        print(answers_aluno, answers_gabarito)
 
         """ Closing the connection from the client. """
         conn.close()
