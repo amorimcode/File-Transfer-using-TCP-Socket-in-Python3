@@ -46,6 +46,11 @@ def main():
 
         answers_aluno = []
         for line in file_aluno.readlines():
+            if line.startswith('Nome:'):
+                answers_aluno.append(line)
+                nome_aluno = 'Aluno: ' + line
+                break
+            
             line = line.split('-')[1]
             answer = []
             for letter in line.split(';'):
@@ -58,6 +63,8 @@ def main():
 
         answers_gabarito = []
         for line in file_gabarito.readlines():
+            if line.startswith('Nome:'):
+                continue
             line = line.split('-')[1]
             answer = []
             for letter in line.split(';'):
@@ -71,13 +78,17 @@ def main():
         hits = 0
         misses = 0
         for idx1, item in enumerate(answers_aluno):
+            if item.startswith('Nome:'):
+                break
             for idx2, value in enumerate(item):
+                print(idx2, value)
+                print('hey')
                 if value == answers_gabarito[idx1][idx2]:
                     hits += 1
                 else:
                     misses += 1
 
-        conn.send(f'Acertos: {hits} \nErros: {misses}'.encode(FORMAT))
+        conn.send(f'{nome_aluno}\nAcertos: {hits} \nErros: {misses}'.encode(FORMAT))
 
         """ Closing the connection from the client. """
         conn.close()
